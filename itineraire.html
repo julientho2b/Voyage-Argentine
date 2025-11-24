@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Itinéraire - Carnet de Voyage Argentine</title>
+  <link rel="stylesheet" href="style.css"> <!-- le même CSS que la page principale -->
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-toggle">
+  <svg width="35" height="35" viewBox="0 0 100 80" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="15"></rect>
+    <rect y="30" width="100" height="15"></rect>
+    <rect y="60" width="100" height="15"></rect>
+  </svg>
+</div>
+
+    <ul class="nav-links">
+      <li><a href="index.html#accueil">Accueil</a></li>
+      <li><a href="index.html#itineraire">Itinéraire</a></li>
+      <li><a href="index.html#photo">Photos</a></li>
+      <li><a href="index.html#budget">Budget</a></li>
+    </ul>
+  </nav>
+
+  <!-- SECTION ITINERAIRE -->
+  <section class="section-fond" id="itineraire-page">
+    <div class="section-content">
+      <h2>Itinéraire complet</h2>
+      <p>Voici le détail de notre parcour à travers l’Argentine depuis la France.</p>
+      <ul>
+        <li>Jour 1 et 2 : Buenos Aires – Découverte de la ville</li>
+        <li>Jour 3 a 5 : Ushuaia - Terre de feu</li>
+        <li>Jour 6 a 11 : El Chatlen El Calafate – Randonnée et paysages</li>
+        <li>Jour 12 et 13 : Retour a Buenos Aires</li>
+        <li>Jour 14 : San Antonio de Areco - Estancia el Ombu</li>
+      </ul>
+      <a href="index.html#accueil" class="btn">Retour à l'accueil</a>
+    </div>
+  </section>
+
+  <script>
+const burger = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+const navItems = document.querySelectorAll('.nav-links a');
+
+burger.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+
+// Fermer le menu quand on clique sur un lien
+navItems.forEach(item => {
+  item.addEventListener('click', () => {
+    navLinks.classList.remove('active');
+  });
+});
+
+</script>
+
+</body>
+</html>

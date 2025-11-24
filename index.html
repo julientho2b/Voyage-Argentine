@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Carnet de voyage Argentine</title>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-toggle">
+  <svg width="35" height="35" viewBox="0 0 100 80" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="15"></rect>
+    <rect y="30" width="100" height="15"></rect>
+    <rect y="60" width="100" height="15"></rect>
+  </svg>
+</div>
+
+    <ul class="nav-links">
+      <li><a href="index.html#accueil">Accueil</a></li>
+      <li><a href="index.html#itineraire">Itinéraire</a></li>
+      <li><a href="index.html#photo">Photos</a></li>
+      <li><a href="index.html#budget">Budget</a></li>
+    </ul>
+  </nav>
+
+ <div class="menu-blur">
+<section id="accueil" class="accueil">
+  <div class="accueil-content">
+    <h1>Carnet de Voyage – Argentine</h1>
+    <p class="sous-titre">Un voyage entre Buenos Aires et la Patagonie</p>
+
+    <p class="intro">
+      Bienvenue dans mon carnet de voyage en Argentine.  
+    Explorez les étapes, les paysages et les moments inoubliables qui ont marqué ce périple.
+    </p>
+
+    <a href="#itineraire" class="btn-start">Commencer le voyage</a>
+  </div>
+</section>
+
+<section id="itineraire" class="itineraire">
+  <div class="itineraire-content">
+    <h2>Itinéraire</h2>
+    <p class="description">
+      Voici notre itinéraire en Argentine, étape par étape :  
+    nous commençons par Buenos Aires, puis direction la Patagonie avec le Fitz Roy et le Perito Moreno.  
+    Chaque lieu offre des paysages uniques et des expériences inoubliables.
+    </p>
+
+    <a href="itineraire.html" class="btn-itineraire">Voir l'itinéraire</a>
+  </div>
+</section>
+
+<section id="photo" class="section-fond">
+  <div class="section-content">
+    <h2>Galerie – Paysages d'Argentine</h2>
+    <p>Découvrez quelques moments forts de notre voyage à travers ville et montagnes.</p>
+    <a href="photos.html" class="btn">Voir toute la galerie</a>
+  </div>
+</section>
+
+<section class="section-fond" id="budget">
+  <div class="section-content">
+    <h2>Budget</h2>
+    <p>Découvrez comment planifier votre voyage en Argentine et gérer vos dépenses efficacement.</p>
+    <a href="budget.html" class="btn">Voir le budget détaillé</a>
+  </div>
+</section>
+</div> 
+
+<script>
+const burger = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+const navItems = document.querySelectorAll('.nav-links a');
+
+burger.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+
+// Fermer le menu quand on clique sur un lien
+navItems.forEach(item => {
+  item.addEventListener('click', () => {
+    navLinks.classList.remove('active');
+  });
+});
+
+</script>
+
+
+
+</body>
+</html>

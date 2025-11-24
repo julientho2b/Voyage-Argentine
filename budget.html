@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Budget</title>
+</head>
+<body>
+   <nav class="navbar">
+    <div class="nav-toggle">
+  <svg width="35" height="35" viewBox="0 0 100 80" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="15"></rect>
+    <rect y="30" width="100" height="15"></rect>
+    <rect y="60" width="100" height="15"></rect>
+  </svg>
+</div>
+
+    <ul class="nav-links">
+      <li><a href="index.html#accueil">Accueil</a></li>
+      <li><a href="index.html#itineraire">Itinéraire</a></li>
+      <li><a href="index.html#photo">Photos</a></li>
+      <li><a href="index.html#budget">Budget</a></li>
+    </ul>
+  </nav>
+  
+    <section id="budget-page" class="section-fond" style="background-image: url('img/bus-ushuaia.webp');">
+  <div class="section-content">
+    <h2>Budget</h2>
+    <p>Voici un aperçu du budget pour ce voyage en Argentine : hébergement, transport, repas et activités. Tout est prévu pour que vous puissiez profiter pleinement sans surprise.</p>
+    <ul>
+      <li>Hébergement : hôtels et auberges confortables - 500 euros</li>
+      <li>Transport : vols internes et internationaux - 2200 euros</li>
+      <li>Location de voiture : 250 euros</li>
+      <li>Argent de poche / sorties : excursions, restaurants - 1200 euros</li>
+      <li>Total - 4150 euros</li>
+    </ul>
+    <a href="index.html#accueil" class="btn">Retour à l'accueil</a>
+  </div>
+</section>
+
+<script>
+  const burger = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+const navItems = document.querySelectorAll('.nav-links a');
+
+burger.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+
+// Fermer le menu quand on clique sur un lien
+navItems.forEach(item => {
+  item.addEventListener('click', () => {
+    navLinks.classList.remove('active');
+  });
+});
+
+</script>
+
+    
+</body>
+</html>
+
+

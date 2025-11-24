@@ -1,0 +1,628 @@
+/* --- NAV BAR STYLE CARNET MODERNE --- */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;       /* Important pour que la nav commence bien à gauche */
+  width: 100%;   /* Remplir toute la largeur */
+  box-sizing: border-box; /* Inclut le padding dans la largeur */
+  padding: 14px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(108, 172, 228, 0.5);
+  color: white;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  backdrop-filter: blur(4px);
+  z-index: 1200;
+}
+
+.nav-links a[href$="#accueil"] {
+  color: #F6B40E; 
+}
+
+.nav-toggle {
+  display: flex;             /* essentiel pour que justify-content marche */
+  flex-direction: column;
+  justify-content: space-between; /* espace égal entre chaque barre */
+  height:30px;              /* hauteur suffisante pour créer de l’air */
+  margin-left: auto;
+  cursor: pointer;
+  display: none;
+  position: relative;
+  z-index: 1100;
+}
+
+/* Menu burger par défaut */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.05rem;
+  position: relative;
+  transition: 0.3s;
+  display: flex;
+  justify-content: center;
+}
+
+/* Soulignement animé */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background: #F6B40E; /* jaune soleil */
+  border-radius: 2px;
+  transition: width 0.25s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a:hover {
+  opacity: 0.85;
+}
+
+
+/* SECTION ACCUEIL MODERNE AVEC IMAGE */
+
+.accueil {
+  background: linear-gradient(
+      rgba(108, 172, 228, 0.25),
+      rgba(108, 172, 228, 0.25)
+    ),
+    url("img/Perito-Moreno.jpg") 
+    center/cover no-repeat;
+  color: white;
+  padding: 120px 20px;
+  text-align: center;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+}
+
+.accueil-content {
+  max-width: 650px;
+  margin: auto;
+  padding: 30px;
+  border-radius: 14px;
+}
+
+.accueil h1 {
+  font-size: 2.6rem;
+  margin-bottom: 12px;
+  color: #FFFFFF;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.35);
+}
+
+
+.sous-titre {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+.intro {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  color: #f0f0f0;
+}
+
+.btn-start {
+  display: inline-block;
+  background: #F6B40E; /* jaune soleil */
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+.btn-start:hover {
+  background: #dda20d;
+}
+
+/* SECTION ITINERAIRE AVEC FITZ ROY */
+
+.itineraire {
+  background: linear-gradient(
+      rgba(108, 172, 228, 0.45),
+      rgba(108, 172, 228, 0.45)
+    ),
+    url("img/Boca.webp") center/cover no-repeat; /* Remplace par le chemin de ta photo */
+  color: white;
+  padding: 120px 20px;
+  text-align: center;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+}
+
+.itineraire-content {
+  max-width: 650px;
+  margin: auto;
+  padding: 30px;
+  border-radius: 14px;
+}
+
+.itineraire h2 {
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.35);
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  color: #f0f0f0;
+}
+
+.btn-itineraire {
+  display: inline-block;
+  background: #F6B40E; /* jaune soleil */
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+.btn-itineraire:hover {
+  background: #dda20d;
+}
+
+/* Section Galerie harmonisée */
+.section-fond {
+  background: linear-gradient(
+      rgba(108, 172, 228, 0.45),
+      rgba(108, 172, 228, 0.45)
+    ),
+    url("img/Fitz-Roy.jpg") center/cover no-repeat;
+  position: relative;
+  padding: 120px 20px;             /* même que les autres sections */
+  text-align: center;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-fond::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.25);    /* overlay léger */
+  z-index: 1;
+}
+
+.section-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+}
+
+.section-content h2 {
+    font-size: 2.4rem;
+    margin-bottom: 12px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.35);
+}
+
+.section-content p {
+  font-weight: 500;                /* identique aux autres sections */
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  background: #F6B40E;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;                 /* harmonisé */
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background: #dda20d;
+}
+
+/* Section Budget */
+#budget {
+  background: linear-gradient(
+      rgba(108, 172, 228, 0.25),
+      rgba(108, 172, 228, 0.25)
+    ),
+    url("img/bus-ushuaia.webp") center/cover no-repeat;
+}
+
+.section-fond {
+  position: relative;
+  padding: 120px 20px;             /* même hauteur que les autres sections */
+  text-align: center;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+}
+
+.section-fond::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.25);    /* overlay léger */
+  z-index: 1;
+}
+
+.section-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+}
+
+.section-content h2 {
+    font-size: 2.4rem;
+    margin-bottom: 12px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.35);
+}
+
+.section-content p {
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  background: #F6B40E;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: 0.2s;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: #dda20d;
+}
+
+
+#itineraire-page {
+  background: linear-gradient(
+      rgba(108, 172, 228, 0.45),
+      rgba(108, 172, 228, 0.45)
+    ),
+    url("img/Boca.webp") center/cover no-repeat;
+  
+  height: 100vh;               /* plein écran */
+  display: flex;
+  flex-direction: column;       /* empile le titre, paragraphe, liste et bouton */
+  justify-content: space-around; /* espace équitable entre chaque élément */
+  align-items: center;
+  text-align: center;
+  color: white;
+  position: relative;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+  padding: 0 20px;
+}
+
+#itineraire-page::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.25); /* overlay léger */
+  z-index: 1;
+}
+
+#itineraire-page .section-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  width: 100%;
+}
+
+#itineraire-page h2 {
+  font-size: 3rem;
+  margin-bottom: 30px;  /* margin réduit pour laisser plus d’espace autour */
+}
+
+#itineraire-page p {
+  font-size: 1.4rem;
+  margin-bottom: ;
+}
+
+#itineraire-page ul {
+  font-size: 1.2rem;
+  line-height: 2;   /* espace entre les lignes plus grand */
+  padding-left: 0;
+  margin: 0;
+}
+
+#itineraire-page .btn {
+  font-size: 1.2rem;
+  padding: 14px 32px;
+}
+
+.photos-section {
+padding: 120px 20px;
+text-align: center;
+background: #f5f5f5; /* fond clair ou couleur à choisir */
+color: white;
+text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+}
+
+.photos-section h2 {
+font-size: 3rem;
+margin-bottom: 40px;
+}
+
+.photos-content p {
+    margin-bottom: 40px;
+}
+
+.photo-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
+gap: 20px; /* espace entre les images */
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.photo {
+width: 100%;
+padding-bottom: 70%; /* ratio hauteur/largeur pour carré ou paysage */
+background-size: cover;
+background-position: center;
+border-radius: 12px;
+box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.photo:hover {
+transform: scale(1.05);
+box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+}
+
+.photos-section btn {
+    display: block;
+    margin: 30px auto 0 auto;
+}
+
+#budget-page {
+  background-image: url("img/bus-ushuaia.webp");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* optionnel : fixe l'image lors du scroll */
+  
+  background-color: rgba(108, 172, 228, 0.45); /* fallback overlay léger */
+  
+  height: 100vh; /* plein écran */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  position: relative;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+  padding: 0 20px;
+}
+
+
+#budget-page::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.25); /* overlay léger pour lisibilité */
+  z-index: 1;
+}
+
+#budget-page .section-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+#budget-page h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+#budget-page p {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+#budget-page ul {
+  font-size: 1.2rem;
+  line-height: 2;
+  margin-bottom: 25px;
+  padding-left: 0;
+  list-style-type: none;
+}
+
+#budget-page .btn {
+  display: inline-block;
+  background: #F6B40E;
+  color: white;
+  padding: 14px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: 0.2s;
+}
+
+#budget-page .btn:hover {
+  background: #dda20d;
+}
+
+.accueil,
+.itineraire,
+.section-fond,
+#itineraire-page,
+#budget-page {
+  min-height: 80vh;         /* garantit une hauteur minimale */
+  background-position: center;
+  background-size: cover;    /* garde les proportions de l'image */
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* centre le contenu verticalement */
+  align-items: center;
+  text-align: center;
+}
+
+/* ------------------------------------------------ */
+/* ----------- RESPONSIVE TABLETTE (≤992px) ------- */
+/* ------------------------------------------------ */
+
+@media (max-width: 992px) {
+
+  /* ===== NAV FULLSCREEN ===== */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 100%;
+    background: rgba(20, 20, 20, 0.8);
+    backdrop-filter: blur(22px);  /* encore plus flou */
+    -webkit-backdrop-filter: blur(22px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    transition: 0.35s ease;
+  }
+
+.section-content li {
+    list-style: none;
+}
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  /* Texte plus petit */
+  .nav-links a {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  /* "Accueil" en jaune */
+  .nav-links a[href*="accueil"] {
+    color: #F6B40E;
+    font-weight: bold;
+  }
+
+  /* Toggle */
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .nav-toggle span {
+    width: 30px;
+    height: 3px;
+    background: white;
+    border-radius: 4px;
+  }
+
+  /* Sections */
+  section {
+    padding: 100px 20px 60px;
+  }
+
+  h1, h2 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  p {
+    font-size: 1rem;
+    text-align: center;
+    line-height: 1.45;
+  }
+
+  .btn, .btn-start, .btn-itineraire {
+    font-size: 1rem;
+    padding: 12px 22px;
+  }
+}
+
+
+/* ------------------------------------------------ */
+/* ------------ SMALL MOBILE (≤600px) ------------- */
+/* ------------------------------------------------ */
+
+@media (max-width: 600px) {
+
+  .nav-links {
+    background: rgba(20, 20, 20, 0.8);
+    backdrop-filter: blur(22px);  /* encore plus flou */
+    -webkit-backdrop-filter: blur(22px);
+  }
+
+  .nav-links a {
+    font-size: 1.4rem;    /* encore plus petit */
+  }
+
+  .nav-toggle span {
+    width: 26px;
+    height: 3px;
+  }
+
+  h1, h2 {
+    font-size: 1.4rem;
+  }
+
+  p {
+    font-size: 0.85rem;
+  }
+
+  section {
+    padding: 90px 15px 60px;
+  }
+
+  .btn, .btn-start, .btn-itineraire {
+    font-size: 0.85rem;
+    padding: 8px 20px;
+  }
+}
+
