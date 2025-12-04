@@ -13,32 +13,31 @@ navItems.forEach((item) => {
   });
 });
 
-// Sélectionner tous les boutons Favori
-const btnFavoris = document.querySelectorAll(".photo-favori");
+const photos = document.querySelectorAll(".photo");
+const toggleFavorisBtn = document.getElementById("toggle-favoris");
+let filterActive = false;
 
-// Boucle sur chaque bouton
-btnFavoris.forEach((btn, index) => {
-  // Vérifier si cet index est déjà favori dans le localStorage
-  if (localStorage.getItem("photoFavori" + index) === "true") {
-    btn.textContent = "❤️";
-  }
+// Initialisation des favoris à partir du localStorage
+photos.forEach((photo, index) => {
+  const coeur = photo.querySelector(".photo-favori");
+  const isFavori = localStorage.getItem("photoFavori" + index) === "true";
 
-  // Ajouter l'événement clic à chaque bouton
-  btn.addEventListener("click", () => {
-    if (btn.textContent === "♡") {
-      btn.textContent = "❤️";
-      localStorage.setItem("photoFavori" + index, "true");
-    } else {
-      btn.textContent = "♡";
-      localStorage.setItem("photoFavori" + index, "false");
+  photo.dataset.favori = isFavori ? "true" : "false"; // <-- synchronisation
+  coeur.textContent = isFavori ? "❤️" : "♡";
+
+  // Clic sur le cœur
+  coeur.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const currentlyFavori = photo.dataset.favori === "true";
+    photo.dataset.favori = currentlyFavori ? "false" : "true";
+    coeur.textContent = currentlyFavori ? "♡" : "❤️";
+    localStorage.setItem("photoFavori" + index, !currentlyFavori);
+
+    if (filterActive && !currentlyFavori) {
+      photo.style.display = "none";
     }
   });
 });
-
-// Récupération du bouton et des photos
-const toggleFavorisBtn = document.getElementById("toggle-favoris");
-const photos = document.querySelectorAll(".photo");
-let filterActive = false;
 
 // Fonction pour mettre à jour l'affichage des photos
 function updatePhotosDisplay() {
@@ -56,27 +55,8 @@ function updatePhotosDisplay() {
     : "Afficher seulement les favoris";
 }
 
-// Clic sur le bouton toggle pour filtrer les favoris
+// Clic sur le bouton toggle
 toggleFavorisBtn.addEventListener("click", () => {
   filterActive = !filterActive;
   updatePhotosDisplay();
-});
-
-// Clic sur le cœur pour ajouter/enlever un favori
-photos.forEach((photo) => {
-  const coeur = photo.querySelector(".photo-favori");
-
-  coeur.addEventListener("click", (e) => {
-    e.stopPropagation(); // évite de déclencher d'autres events si besoin
-
-    // Basculer l'état favori
-    const isFavori = photo.dataset.favori === "true";
-    photo.dataset.favori = isFavori ? "false" : "true";
-    coeur.textContent = isFavori ? "♡" : "❤️";
-
-    // Si le filtre est actif, mettre à jour l'affichage
-    if (filterActive && !isFavori) {
-      photo.style.display = "none";
-    }
-  });
 });
