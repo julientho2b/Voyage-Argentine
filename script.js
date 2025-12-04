@@ -35,18 +35,48 @@ btnFavoris.forEach((btn, index) => {
   });
 });
 
-// Tout le code est exécuté après le chargement du DOM grâce à defer
-const btnFiltrer = document.getElementById("filtrer-favoris");
-const btnTout = document.getElementById("tout-afficher");
+// Récupération du bouton et des photos
+const toggleFavorisBtn = document.getElementById("toggle-favoris");
 const photos = document.querySelectorAll(".photo");
+let filterActive = false;
 
-btnFiltrer.addEventListener("click", () => {
-  photos.forEach((photo, index) => {
-    const estFavori = localStorage.getItem("photoFavori" + index) === "true";
-    photo.style.display = estFavori ? "block" : "none";
+// Fonction pour mettre à jour l'affichage des photos
+function updatePhotosDisplay() {
+  photos.forEach((photo) => {
+    const isFavori = photo.dataset.favori === "true";
+    photo.style.display = filterActive
+      ? isFavori
+        ? "block"
+        : "none"
+      : "block";
   });
+
+  toggleFavorisBtn.textContent = filterActive
+    ? "Afficher toutes les photos"
+    : "Afficher seulement les favoris";
+}
+
+// Clic sur le bouton toggle pour filtrer les favoris
+toggleFavorisBtn.addEventListener("click", () => {
+  filterActive = !filterActive;
+  updatePhotosDisplay();
 });
 
-btnTout.addEventListener("click", () => {
-  photos.forEach((photo) => (photo.style.display = "block"));
+// Clic sur le cœur pour ajouter/enlever un favori
+photos.forEach((photo) => {
+  const coeur = photo.querySelector(".photo-favori");
+
+  coeur.addEventListener("click", (e) => {
+    e.stopPropagation(); // évite de déclencher d'autres events si besoin
+
+    // Basculer l'état favori
+    const isFavori = photo.dataset.favori === "true";
+    photo.dataset.favori = isFavori ? "false" : "true";
+    coeur.textContent = isFavori ? "♡" : "❤️";
+
+    // Si le filtre est actif, mettre à jour l'affichage
+    if (filterActive && !isFavori) {
+      photo.style.display = "none";
+    }
+  });
 });

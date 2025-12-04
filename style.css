@@ -231,7 +231,8 @@
   margin-bottom: 15px;
 }
 
-.btn {
+.btn,
+#toggle-favoris {
   display: inline-block;
   margin-top: 20px;
   background: #f6b40e;
@@ -241,11 +242,16 @@
   text-decoration: none;
   font-weight: 500; /* harmonisé */
   font-size: 1rem;
+  font-weight: bold;
   transition: 0.2s;
+  border: none;
+  box-shadow: none;
 }
 
+#toggle-favoris,
 .btn:hover {
   background: #dda20d;
+  cursor: pointer;
 }
 
 /* Section Budget */
@@ -489,7 +495,7 @@
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
 }
 
-.photos-section btn {
+.photos-section btn .photos-section #toggle-favoris {
   display: block;
   margin: 30px auto 0 auto;
 }
