@@ -1,3 +1,4 @@
+/* ------------------- NAV BURGER ------------------- */
 const burger = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
 const navItems = document.querySelectorAll(".nav-links a");
@@ -13,6 +14,7 @@ navItems.forEach((item) => {
   });
 });
 
+/* ------------------- FAVORIS PHOTOS ------------------- */
 const photos = document.querySelectorAll(".photo");
 const toggleFavorisBtn = document.getElementById("toggle-favoris");
 let filterActive = false;
@@ -22,7 +24,7 @@ photos.forEach((photo, index) => {
   const coeur = photo.querySelector(".photo-favori");
   const isFavori = localStorage.getItem("photoFavori" + index) === "true";
 
-  photo.dataset.favori = isFavori ? "true" : "false"; // <-- synchronisation
+  photo.dataset.favori = isFavori ? "true" : "false";
   coeur.textContent = isFavori ? "❤️" : "♡";
 
   // Clic sur le cœur
@@ -61,6 +63,7 @@ toggleFavorisBtn.addEventListener("click", () => {
   updatePhotosDisplay();
 });
 
+/* ------------------- LIGHTBOX ------------------- */
 const openPhoto = document.querySelectorAll(".photo");
 const lightboxEl = document.getElementById("lightbox");
 const lightboxImg = document.querySelector(".lightbox-img");
@@ -95,24 +98,37 @@ function openLightbox(photo) {
   showPhoto(currentIndex);
 }
 
-// Ajouter écouteur clic sur toutes les photos
+// Écouteurs clic et tap sur toutes les photos
 openPhoto.forEach((photo) => {
   photo.addEventListener("click", () => openLightbox(photo));
+  photo.addEventListener("touchstart", () => openLightbox(photo));
 });
 
 // Fermer la lightbox
 closeBtn.addEventListener("click", () => {
   lightboxEl.style.display = "none";
 });
+closeBtn.addEventListener("touchstart", () => {
+  lightboxEl.style.display = "none";
+});
 
-// Navigation flèches
+// Navigation flèches (précédent / suivant)
 prevBtn.addEventListener("click", () => {
+  currentIndex =
+    (currentIndex - 1 + visiblePhotos.length) % visiblePhotos.length;
+  showPhoto(currentIndex);
+});
+prevBtn.addEventListener("touchstart", () => {
   currentIndex =
     (currentIndex - 1 + visiblePhotos.length) % visiblePhotos.length;
   showPhoto(currentIndex);
 });
 
 nextBtn.addEventListener("click", () => {
+  currentIndex = (currentIndex + 1) % visiblePhotos.length;
+  showPhoto(currentIndex);
+});
+nextBtn.addEventListener("touchstart", () => {
   currentIndex = (currentIndex + 1) % visiblePhotos.length;
   showPhoto(currentIndex);
 });
