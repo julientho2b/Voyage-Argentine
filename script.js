@@ -60,3 +60,59 @@ toggleFavorisBtn.addEventListener("click", () => {
   filterActive = !filterActive;
   updatePhotosDisplay();
 });
+
+const openPhoto = document.querySelectorAll(".photo");
+const lightboxEl = document.getElementById("lightbox");
+const lightboxImg = document.querySelector(".lightbox-img");
+const closeBtn = document.querySelector(".close");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+
+let currentIndex = 0;
+let visiblePhotos = [];
+
+// Fonction pour afficher une photo dans la lightbox
+function showPhoto(index) {
+  const photo = visiblePhotos[index];
+  const photoStyle = photo.style.backgroundImage;
+  const imgSrc = photoStyle.replace('url("', "").replace('")', "");
+  lightboxImg.src = imgSrc;
+}
+
+// Fonction pour ouvrir la lightbox sur une photo cliquée
+function openLightbox(photo) {
+  lightboxEl.style.display = "flex";
+
+  // Créer tableau des photos visibles
+  visiblePhotos = Array.from(openPhoto).filter(
+    (p) => p.style.display !== "none",
+  );
+
+  // Définir l'index de la photo cliquée
+  currentIndex = visiblePhotos.indexOf(photo);
+
+  // Afficher la photo
+  showPhoto(currentIndex);
+}
+
+// Ajouter écouteur clic sur toutes les photos
+openPhoto.forEach((photo) => {
+  photo.addEventListener("click", () => openLightbox(photo));
+});
+
+// Fermer la lightbox
+closeBtn.addEventListener("click", () => {
+  lightboxEl.style.display = "none";
+});
+
+// Navigation flèches
+prevBtn.addEventListener("click", () => {
+  currentIndex =
+    (currentIndex - 1 + visiblePhotos.length) % visiblePhotos.length;
+  showPhoto(currentIndex);
+});
+
+nextBtn.addEventListener("click", () => {
+  currentIndex = (currentIndex + 1) % visiblePhotos.length;
+  showPhoto(currentIndex);
+});
