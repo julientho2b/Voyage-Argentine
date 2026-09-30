@@ -1,72 +1,157 @@
-/* --- NAV BAR STYLE CARNET MODERNE --- */
+/* =========================================================
+   POLICES (l'@import doit rester en toute première position)
+========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Figtree:wght@400;500;600&display=swap");
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+  /* Drapeau */
+  --celeste: #75aadb;
+  --jaune: #f6b40e;
+  --jaune-hover: #dda20d;
+
+  /* Bleus */
+  --bleu-nuit: #1b3a57;
+  --bleu-glacier: #24507a;
+
+  /* Terre (Salta, Mendoza, Patagonie) */
+  --terracotta: #b8571f;
+  --terracotta-hover: #9c4718;
+
+  /* Neutres */
+  --blanc: #ffffff;
+  --fond: #f3ece0; /* sable */
+  --surface: #ffffff; /* grandes cartes */
+  --surface-douce: #f8f4ec; /* cartes à l'intérieur des cartes */
+  --gris-texte: #4a6078; /* gris-bleu issu de la palette */
+  --bordure: rgba(27, 58, 87, 0.1);
+
+  --texte: var(--bleu-nuit);
+  --police-texte: "Figtree", system-ui, sans-serif;
+  --police-titre: "Fraunces", Georgia, serif;
+
+  --rayon: 10px;
+  --rayon-moyen: 14px;
+  --rayon-grand: 18px;
+  --ombre: 0 6px 20px rgba(27, 58, 87, 0.12);
+}
+
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 70px;
+}
+
+body {
+  font-family: var(--police-texte);
+  background: var(--fond);
+  color: var(--texte);
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--police-titre);
+  line-height: 1.2;
+}
+
+/* Grandes cartes */
+.bloc-accueil,
+.bloc-carte,
+.bloc-photos,
+.itineraire-details {
+  background: var(--surface);
+  border-radius: var(--rayon-grand);
+  border: 1px solid var(--bordure);
+  box-shadow: var(--ombre);
+}
+
+/* Focus clavier visible */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--jaune);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
 .navbar {
   position: fixed;
   top: 0;
-  left: 0; /* Important pour que la nav commence bien à gauche */
-  width: 100%; /* Remplir toute la largeur */
-  box-sizing: border-box; /* Inclut le padding dans la largeur */
+  left: 0;
+  width: 100%;
   padding: 14px 40px;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(108, 172, 228, 0.5);
-  color: white;
-  font-family: "Poppins", sans-serif;
+
+  background: rgba(27, 58, 87, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  color: var(--blanc);
+
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(4px);
+
   z-index: 1200;
 }
 
-.nav-links a[href$="#accueil"] {
-  color: #f6b40e;
-}
-
-.nav-toggle {
-  display: flex; /* essentiel pour que justify-content marche */
-  flex-direction: column;
-  justify-content: space-between; /* espace égal entre chaque barre */
-  height: 30px; /* hauteur suffisante pour créer de l’air */
-  margin-left: auto;
-  cursor: pointer;
-  display: none;
-  position: relative;
-  z-index: 1100;
-}
-
-/* Menu burger par défaut */
 .nav-links {
   display: flex;
-  list-style: none;
   gap: 30px;
+  list-style: none;
 }
 
 .nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1.05rem;
   position: relative;
-  transition: 0.3s;
+
   display: flex;
   justify-content: center;
+
+  color: var(--blanc);
+  text-decoration: none;
+
+  font-weight: 500;
+  font-size: 1.05rem;
+
+  transition: 0.25s ease;
 }
 
-/* Soulignement animé */
+/* Lien actif : ajoute la classe .active en JS selon la section visible */
+.nav-links a.active {
+  color: var(--jaune);
+}
+
 .nav-links a::after {
   content: "";
+
   position: absolute;
   left: 0;
-  bottom: -3px;
-  width: 0%;
+  bottom: -5px;
+
+  width: 0;
   height: 2px;
-  background: #f6b40e; /* jaune soleil */
+
+  background: var(--jaune);
   border-radius: 2px;
+
   transition: width 0.25s ease;
 }
 
@@ -78,691 +163,642 @@
   opacity: 0.85;
 }
 
-/* SECTION ACCUEIL MODERNE AVEC IMAGE */
+.nav-toggle {
+  display: none;
+  align-items: center;
 
-.accueil {
-  background:
-    linear-gradient(rgba(108, 172, 228, 0.25), rgba(108, 172, 228, 0.25)),
-    url("img/Perito-Moreno.jpg") center/cover no-repeat;
-  color: white;
-  padding: 120px 20px;
-  text-align: center;
-  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+  margin-left: auto;
+
+  cursor: pointer;
+  position: relative;
+  z-index: 1100;
 }
 
-.accueil-content {
-  max-width: 650px;
-  margin: auto;
-  padding: 30px;
-  border-radius: 14px;
+/* =========================================================
+  HEADER
+========================================================= */
+
+.hero {
+  aspect-ratio: 3 / 1;
+  min-height: 300px;
+  max-height: 70vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 40px 30px;
+  color: var(--blanc);
+  background-color: var(--bleu-nuit);
+  background-image:
+    linear-gradient(to top, rgba(27, 58, 87, 0.8), rgba(27, 58, 87, 0.15) 60%),
+    url("img/Fitz-roy-banniere.jpg");
+  background-size: cover;
+  background-position: 55% 15%;
+  background-repeat: no-repeat;
 }
 
-.accueil h1 {
-  font-size: 2.6rem;
-  margin-bottom: 12px;
-  color: #ffffff;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
+.hero h1 {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
 }
 
-.sous-titre {
+.hero p {
   font-size: 1.2rem;
-  opacity: 0.9;
-  margin-bottom: 20px;
+  max-width: 40ch;
+  margin-top: 8px;
+}
+
+/* =========================================================
+   CARTE
+========================================================= */
+
+#map {
+  width: 90%;
+  height: 600px;
+  margin: 30px auto;
+  border-radius: var(--rayon-grand);
+  border: 1px solid var(--bordure);
+  box-shadow: var(--ombre);
+}
+
+.trajet-label {
+  white-space: nowrap;
+  color: var(--bleu-nuit);
+  font-weight: 700;
+  font-size: 13px;
+  text-shadow: 0 1px 2px white;
+}
+
+/* =========================================================
+   STRUCTURE PRINCIPALE
+========================================================= */
+
+.petit-titre {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--terracotta);
+  margin-bottom: 6px;
 }
 
 .intro {
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 25px;
-  color: #f0f0f0;
+  color: var(--gris-texte);
+  margin-top: 8px;
 }
 
-.btn-start {
-  display: inline-block;
-  background: #f6b40e; /* jaune soleil */
-  padding: 12px 28px;
-  border-radius: 8px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: 0.2s;
+.itineraire-header,
+.bloc-accueil,
+.bloc-photos {
+  padding: 25px 30px 0;
 }
 
-.btn-start:hover {
-  background: #dda20d;
+.dashboard {
+  min-height: 100vh;
+  padding: 90px 30px 30px;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 20px;
 }
 
-/* SECTION ITINERAIRE AVEC FITZ ROY */
-
-.itineraire {
-  background:
-    linear-gradient(rgba(108, 172, 228, 0.45), rgba(108, 172, 228, 0.45)),
-    url("img/Boca.webp") center/cover no-repeat; /* Remplace par le chemin de ta photo */
-  color: white;
-  padding: 120px 20px;
-  text-align: center;
-  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
-}
-
-.itineraire-content {
-  max-width: 650px;
-  margin: auto;
-  padding: 30px;
-  border-radius: 14px;
-}
-
-.itineraire h2 {
-  font-size: 2.4rem;
-  margin-bottom: 12px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
-}
-
-.description {
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 25px;
-  color: #f0f0f0;
-}
-
-.btn-itineraire {
-  display: inline-block;
-  background: #f6b40e; /* jaune soleil */
-  padding: 12px 28px;
-  border-radius: 8px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: 0.2s;
-}
-
-.btn-itineraire:hover {
-  background: #dda20d;
-}
-
-/* Section Galerie harmonisée */
-.section-fond {
-  background:
-    linear-gradient(rgba(108, 172, 228, 0.45), rgba(108, 172, 228, 0.45)),
-    url("img/Fitz-Roy.jpg") center/cover no-repeat;
-  position: relative;
-  padding: 120px 20px; /* même que les autres sections */
-  text-align: center;
-  color: white;
+.colonne-gauche,
+.colonne-droite {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.section-fond::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.25); /* overlay léger */
-  z-index: 1;
+.bloc-accueil > h2 {
+  font-size: 1.75rem;
 }
 
-.section-content {
-  position: relative;
-  z-index: 2;
-  max-width: 700px;
-  margin: 0 auto;
-  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+.infos-voyage {
+  margin-top: 10px;
+  padding: 15px;
+  gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
-.section-content h2 {
-  font-size: 2.4rem;
+/* Petites cartes (sable, sur fond blanc) */
+.destinations,
+.transports,
+.itineraire-resume,
+.budget-resume {
+  min-height: 250px;
+  background: var(--surface-douce);
+  border-radius: var(--rayon-moyen);
+  border: 1px solid var(--bordure);
+}
+
+.destinations,
+.transports,
+.budget-resume {
+  padding: 18px;
+}
+
+.itineraire-resume {
+  padding: 20px;
+}
+
+.destinations h3,
+.transports h3 {
   margin-bottom: 12px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
+  font-size: 1rem;
 }
 
-.section-content p {
-  font-weight: 500; /* identique aux autres sections */
-  color: #fff;
+.transports > div + div {
+  margin-top: 15px;
+}
+
+.destinations p,
+.transports p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.itineraire-resume h3 {
   margin-bottom: 15px;
+  font-size: 1.05rem;
 }
 
-.btn,
-#toggle-favoris {
-  display: inline-block;
-  margin-top: 20px;
-  background: #f6b40e;
-  color: white;
-  padding: 12px 28px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 500; /* harmonisé */
-  font-size: 1rem;
-  font-weight: bold;
-  transition: 0.2s;
-  border: none;
-  box-shadow: none;
+.etape {
+  padding: 22px;
+  margin-bottom: 18px;
+  background: var(--surface-douce);
+  border-radius: var(--rayon-moyen);
+  box-shadow: 0 4px 12px rgba(27, 58, 87, 0.06);
+  border: 1px solid var(--bordure);
 }
 
-#toggle-favoris,
-.btn:hover {
-  background: #dda20d;
-  cursor: pointer;
-}
-
-/* Section Budget */
-#budget {
-  background:
-    linear-gradient(rgba(108, 172, 228, 0.25), rgba(108, 172, 228, 0.25)),
-    url("img/bus-ushuaia.webp") center/cover no-repeat;
-}
-
-.section-fond {
-  position: relative;
-  padding: 120px 20px; /* même hauteur que les autres sections */
-  text-align: center;
-  color: white;
+.etapes-resume {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.etapes-resume p {
+  display: flex;
   align-items: center;
-  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+  gap: 10px;
+  margin: 0;
+  font-size: 0.9rem;
 }
 
-.section-fond::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.25); /* overlay léger */
-  z-index: 1;
+/* Numéros d'étapes : terracotta (lisible, contrairement au celeste) */
+.etapes-resume span {
+  font-weight: 700;
+  color: var(--terracotta);
+  min-width: 25px;
 }
 
-.section-content {
-  position: relative;
-  z-index: 2;
-  max-width: 700px;
-  margin: 0 auto;
-  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+.etapes-resume strong {
+  margin-left: auto;
+  font-weight: 500;
+  color: var(--bleu-glacier);
 }
 
-.section-content h2 {
-  font-size: 2.4rem;
-  margin-bottom: 12px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
+.budget-resume h2 {
+  margin: 8px 0 15px;
+  font-size: 1.5rem;
+  color: var(--bleu-glacier);
+}
+
+.budget-resume p {
+  margin: 0;
+  font-weight: 600;
+}
+
+.budget-resume strong {
+  font-family: var(--police-titre);
+  font-size: 1rem;
+  color: var(--bleu-glacier);
+}
+
+.budget-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.budget-details > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.budget-details span {
+  width: 25px;
+}
+
+.budget-details p {
+  margin: 0;
+}
+
+.budget-details strong {
+  margin-left: auto;
+}
+
+.itineraire-details {
+  padding: 30px 30px 13px;
+}
+
+.lieux {
+  margin: 0;
+  padding-left: 20px;
+  line-height: 1.7;
+  color: var(--gris-texte);
+  list-style: none;
+}
+
+/* =========================================================
+   LÉGENDE DE LA CARTE
+========================================================= */
+
+.map-legend {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 12px 15px;
+  border-radius: 12px;
+  box-shadow: var(--ombre);
+
+  color: var(--bleu-nuit);
+  font-size: 0.85rem;
+  line-height: 1.8;
+
+  min-width: 150px;
+}
+
+.map-legend div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-icon,
+.legend-flight,
+.legend-line {
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.legend-icon {
+  display: inline-flex;
+  justify-content: center;
+}
+
+/* Vols : celeste pointillé */
+.legend-flight {
+  height: 3px;
+  border-top: 3px dashed var(--celeste);
+}
+
+/* Trajets terrestres : terracotta (remplace le vert) */
+.legend-line {
+  height: 3px;
+  background: var(--terracotta);
+  border-radius: 3px;
+}
+
+/* =========================================================
+   PHOTOS & LIGHTBOX
+========================================================= */
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.photo {
+  cursor: pointer;
+  animation: apparition 0.5 ease both;
+  height: 180px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+@keyframes apparition {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .lightbox {
-  display: none; /* cachée par défaut */
+  display: flex;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.85);
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-  flex-direction: column;
+
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0s linear 0.3s;
+}
+
+.lightbox.open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease;
 }
 
 .lightbox-content {
   position: relative;
+  width: 90vw;
+  height: 90vh;
   display: flex;
-  flex-direction: column; /* photo puis flèches */
+  justify-content: center;
   align-items: center;
 }
 
 .lightbox-img {
-  max-width: 90vh;
+  transition: opacity 0.25 ease;
+  display: block;
+  max-width: 90vw;
   max-height: 80vh;
   object-fit: contain;
   border-radius: 12px;
 }
 
+.lightbox-img changing {
+  opacity: 0;
+}
+
 .close {
-  position: absolute; /* ou fixed si tu veux qu'elle reste visible en scroll */
-  top: 20px;
-  right: 20px;
-  font-size: 1.8rem;
+  position: fixed;
+  top: 10px;
+  right: 15px;
+  font-size: 2rem;
   color: white;
   cursor: pointer;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 5px 10px;
-  border-radius: 6px;
-  z-index: 1001; /* plus haut que l'image */
+  z-index: 2;
 }
 
 .lightbox-nav {
-  margin-top: 10px; /* espace entre photo et boutons */
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
   display: flex;
-  gap: 20px; /* espace entre les flèches */
+  justify-content: space-between;
+  padding: 0 15px;
 }
 
 .lightbox-nav button {
+  border: none;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
   font-size: 1.5rem;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
   cursor: pointer;
-  background: rgba(0, 0, 0, 0.3);
-  color: white;
 }
 
-.section-content p {
-  font-weight: 500;
-  color: #fff;
-  margin-bottom: 15px;
-}
-
-.btn {
-  display: inline-block;
-  margin-top: 20px;
-  background: #f6b40e;
-  color: white;
-  padding: 12px 28px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: 0.2s;
-  font-weight: bold;
-}
-
-.btn:hover {
-  background: #dda20d;
-}
-
-#itineraire-page {
-  background:
-    linear-gradient(rgba(108, 172, 228, 0.45), rgba(108, 172, 228, 0.45)),
-    url("img/Boca.webp") center/cover no-repeat;
-
-  height: 100vh; /* plein écran */
-  display: flex;
-  flex-direction: column; /* empile le titre, paragraphe, liste et bouton */
-  justify-content: space-around; /* espace équitable entre chaque élément */
-  align-items: center;
-  text-align: center;
-  color: white;
-  position: relative;
-  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
-  padding: 0 20px;
-}
-
-#itineraire-page::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.25); /* overlay léger */
-  z-index: 1;
-}
-
-#itineraire-page .section-content {
-  position: relative;
-  z-index: 2;
-  max-width: 700px;
-  width: 100%;
-}
-
-#itineraire-page h2 {
-  font-size: 3rem;
-  margin-bottom: 30px; /* margin réduit pour laisser plus d’espace autour */
-}
-
-#itineraire-page p {
-  font-size: 1.4rem;
-}
-
-#itineraire-page ul {
-  font-size: 1.2rem;
-  line-height: 2; /* espace entre les lignes plus grand */
-  padding-left: 0;
-  margin: 0;
-}
-
-#itineraire-page .btn {
-  font-size: 1.2rem;
-  padding: 14px 32px;
-}
-
-.photos-section {
-  padding: 120px 20px;
-  text-align: center;
-  background: #f5f5f5; /* fond clair ou couleur à choisir */
-  color: white;
-  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
-}
-
-.photos-section h2 {
-  font-size: 3rem;
-  margin-bottom: 40px;
-}
-
-.photos-content p {
-  margin-bottom: 40px;
-}
-
-#filtrer-favoris,
-#tout-afficher {
-  display: inline-block;
-  background-color: #f6b40e;
-  color: white !important; /* s’assure que la couleur blanche passe */
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  margin: 20px 5px;
-  transition: background 0.2s;
-}
-
-#filtrer-favoris:hover,
-#tout-afficher:hover {
-  background-color: #dda20d;
-}
-
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
-  gap: 20px; /* espace entre les images */
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.photo-favori {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  color: white;
-  cursor: pointer;
-  transition: color 0.2s;
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1;
-}
-
-.photo-favori:hover {
-  transform: scale(1.2);
-}
-
-.photo {
-  position: relative;
-  cursor: pointer;
-  width: 100%;
-  padding-bottom: 70%; /* ratio hauteur/largeur pour carré ou paysage */
-  background-size: cover;
-  background-position: center;
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-  transition:
-    transform 0.3s,
-    box-shadow 0.3s;
-}
-
-.photo:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-}
-
-.photos-section btn .photos-section #toggle-favoris {
+/* Bouton principal : le jaune du soleil de Mai, utilisé ici */
+#voir-galerie {
   display: block;
-  margin: 30px auto 0 auto;
+  margin: 33px auto 34px;
+  padding: 12px 26px;
+  border: none;
+  border-radius: 30px;
+  background: var(--jaune);
+  color: var(--bleu-nuit);
+  font-family: var(--police-texte);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(246, 180, 14, 0.35);
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
 }
 
-#budget-page {
-  background-image: url("img/bus-ushuaia.webp");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed; /* optionnel : fixe l'image lors du scroll */
-
-  background-color: rgba(108, 172, 228, 0.45); /* fallback overlay léger */
-
-  height: 100vh; /* plein écran */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: white;
-  position: relative;
-  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
-  padding: 0 20px;
+#voir-itineraire {
+  display: block;
+  margin: 15px auto;
+  padding: 12px 26px;
+  border: none;
+  border-radius: 30px;
+  background: var(--jaune);
+  color: var(--bleu-nuit);
+  font-family: var(--police-texte);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(246, 180, 14, 0.35);
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
 }
 
-#budget-page::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.25); /* overlay léger pour lisibilité */
-  z-index: 1;
+#voir-galerie:hover {
+  background: var(--jaune-hover);
+  transform: translateY(-2px);
 }
 
-#budget-page .section-content {
-  position: relative;
-  z-index: 2;
-  max-width: 700px;
-  margin: 0 auto;
+#voir-galerie:active {
+  transform: translateY(0);
 }
 
-#budget-page h2 {
-  font-size: 3rem;
-  margin-bottom: 20px;
+/* =========================================================
+   ITINÉRAIRE COMPLET
+========================================================= */
+
+.itineraire-details > h3 {
+  margin-bottom: 8px;
+  font-size: 24px;
 }
 
-#budget-page p {
-  font-size: 1.3rem;
-  margin-bottom: 20px;
+.itineraire-details > p {
+  margin-bottom: 35px;
+  color: var(--gris-texte);
+  line-height: 1.6;
 }
 
-#budget-page ul {
-  font-size: 1.2rem;
-  line-height: 2;
-  margin-bottom: 25px;
-  padding-left: 0;
-  list-style-type: none;
-}
-
-#budget-page .btn {
-  display: inline-block;
-  background: #f6b40e;
-  color: white;
-  padding: 14px 32px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.2rem;
-  transition: 0.2s;
-}
-
-#budget-page .btn:hover {
-  background: #dda20d;
-}
-
-.accueil,
-.itineraire,
-.section-fond,
-#itineraire-page,
-#budget-page {
-  min-height: 80vh; /* garantit une hauteur minimale */
-  background-position: center;
-  background-size: cover; /* garde les proportions de l'image */
-  background-repeat: no-repeat;
+.etapes {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* centre le contenu verticalement */
-  align-items: center;
-  text-align: center;
+  gap: 0;
 }
 
-/* ------------------------------------------------ */
-/* ----------- RESPONSIVE TABLETTE (≤992px) ------- */
-/* ------------------------------------------------ */
+/* Soulignement terracotta, largeur adaptée au titre */
+.etape h3 {
+  padding: 10px 0 12px;
+  margin: 10px 0 25px;
+  border-bottom: 2px solid var(--terracotta);
 
-@media (max-width: 992px) {
-  /* ===== NAV FULLSCREEN ===== */
-  .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    height: 100vh;
-    width: 100%;
-    background: rgba(20, 20, 20, 0.8);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    transition: 0.35s ease;
+  width: fit-content;
+  max-width: 100%;
+
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.etape p {
+  margin: 15px 0 0;
+  line-height: 1.7;
+  color: var(--gris-texte);
+}
+
+.lieux li {
+  margin-bottom: 6px;
+}
+
+.lieux li::before {
+  content: "–";
+  color: var(--celeste);
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1400px) {
+  .etapes-resume p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .infos-voyage {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    margin-top: 64px;
+    min-height: 360px;
+    padding: 30px 20px;
+    background-position: 53% 15%;
   }
 
-  .nav-links.active {
-    right: 0;
+  .hero p {
+    font-size: 1rem;
   }
 
-  .nav-links a {
-    font-size: 1.5rem; /* légèrement plus petit que 1.6rem */
-    text-align: center;
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
-  }
-
-  .nav-links a[href*="accueil"] {
-    color: #f6b40e;
-    font-weight: bold;
+  .dashboard {
+    grid-template-columns: 1fr;
+    padding: 80px 15px 20px;
   }
 
   .nav-toggle {
     display: flex;
-    flex-direction: column;
-    gap: 6px;
   }
 
-  .nav-toggle span {
-    width: 30px;
-    height: 3px;
-    background: white;
-    border-radius: 4px;
-  }
-
-  /* Sections */
-  section {
-    padding: 80px 20px 50px;
-  }
-
-  h1 {
-    font-size: 5vw; /* taille adaptative selon la largeur de l'écran */
-    text-align: center;
-  }
-
-  h2 {
-    font-size: 4.5vw;
-    text-align: center;
-  }
-
-  p {
-    font-size: 1rem;
-    text-align: center;
-    line-height: 1.5;
-  }
-
-  .btn,
-  .btn-start,
-  .btn-itineraire {
-    font-size: 1rem;
-    padding: 12px 24px;
-  }
-
-  .section-content li {
-    list-style: none;
-    margin-bottom: 8px;
-  }
-}
-
-/* ------------------------------------------------ */
-/* ------------ RESPONSIVE MOBILE ≤600px --------- */
-/* ------------------------------------------------ */
-
-@media (max-width: 600px) {
-  /* ---------------- NAVIGATION ---------------- */
   .nav-links {
-    background: rgba(20, 20, 20, 0.85);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-  }
+    position: fixed;
 
-  .nav-links a {
-    font-size: 1.5rem; /* lisible pour le doigt */
-    text-align: center;
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+    top: 0;
+    right: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    background: rgba(27, 58, 87, 0.94);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    z-index: 1000;
+
+    transform: translateX(100%);
+    transition: transform 0.4s ease;
   }
 
   .nav-links.active {
-    right: 0;
+    transform: translateX(0);
   }
 
-  .nav-toggle span {
-    width: 28px;
-    height: 3px;
+  .lightbox-content {
+    width: 90vw;
+    height: 90vh;
   }
 
-  /* ---------------- TITRES ---------------- */
-  h1 {
-    font-size: 6vw; /* proportionnel à la largeur de l'écran */
-    text-align: center;
-  }
-
-  h2 {
-    font-size: 5.5vw;
-    text-align: center;
-  }
-
-  /* ---------------- PARAGRAPHES ---------------- */
-  p {
-    font-size: 1rem; /* ~16px pour mobile */
-    line-height: 1.6;
-    text-align: center;
-  }
-
-  /* ---------------- SECTIONS ---------------- */
-  section {
-    padding: 70px 15px 50px;
-  }
-
-  /* ---------------- LISTES ---------------- */
-  .section-content ul,
-  .section-content li {
-    list-style: none; /* supprime les puces sur mobile */
-    padding-left: 0;
-    margin-left: 0;
-    font-size: 0.95rem;
-    line-height: 1.5;
-  }
-
-  /* ---------------- BOUTONS ---------------- */
-  .btn,
-  .btn-start,
-  .btn-itineraire {
-    font-size: 1rem; /* 16px confortable */
-    padding: 12px 24px;
-    border-radius: 8px;
-  }
-
-  /* ---------------- LIGHTBOX ---------------- */
   .lightbox-img {
-    max-width: 90%; /* large mais pas trop */
-    max-height: 50vh; /* réduit la hauteur pour la croix */
-    object-fit: contain;
-    border-radius: 12px;
+    max-width: 75vw;
+    max-height: 75vh;
+  }
+
+  .close {
+    display: block;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+  }
+
+  .lightbox-nav {
+    width: 100%;
+    padding: 0;
+  }
+
+  .lightbox-nav button {
+    transform: translateX(35px);
+  }
+
+  .lightbox-nav button:last-child {
+    transform: translateX(-35px);
   }
 }
-/* --- FIN STYLE CARNET MODERNE --- */
+
+@media (min-width: 551px) and (max-width: 619px) {
+  .hero {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .map-legend {
+    display: none;
+  }
+
+  .hero {
+    aspect-ratio: 4 / 5;
+    min-height: 0;
+    max-height: 65vh;
+    padding: 30px 20px;
+    background-image:
+      linear-gradient(
+        to top,
+        rgba(27, 58, 87, 0.85),
+        rgba(27, 58, 87, 0.1) 60%
+      ),
+      url("img/Fitz-roy-banniere-mobile.jpg");
+    background-position: center top;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+}
+
+/* Respect des préférences de mouvement réduit */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

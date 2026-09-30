@@ -1,75 +1,331 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel=" stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
     <title>Carnet de voyage Argentine</title>
-</head>
-<body>
-  <nav class="navbar">
-    <div class="nav-toggle">
-  <svg width="35" height="35" viewBox="0 0 100 80" fill="white" xmlns="http://www.w3.org/2000/svg">
-    <rect width="100" height="15"></rect>
-    <rect y="30" width="100" height="15"></rect>
-    <rect y="60" width="100" height="15"></rect>
-  </svg>
-</div>
+  </head>
+  <header class="hero" id="accueil">
+    <div class="hero-contenu">
+      <h1>Argentine</h1>
+      <p>14 jours entre Buenos Aires et la Patagonie</p>
+    </div>
+  </header>
+  <body>
+    <nav class="navbar">
+      <div class="nav-toggle">
+        <svg
+          width="35"
+          height="35"
+          viewBox="0 0 100 80"
+          fill="white"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="100" height="15"></rect>
+          <rect y="30" width="100" height="15"></rect>
+          <rect y="60" width="100" height="15"></rect>
+        </svg>
+      </div>
 
-    <ul class="nav-links">
-      <li><a href="index.html#accueil">Accueil</a></li>
-      <li><a href="index.html#itineraire">Itinéraire</a></li>
-      <li><a href="index.html#photo">Photos</a></li>
-      <li><a href="index.html#budget">Budget</a></li>
-    </ul>
-  </nav>
+      <ul class="nav-links">
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="index.html#itineraire">Itinéraire</a></li>
+        <li><a href="index.html#photo">Photos</a></li>
+        <li><a href="index.html#budget-resume">Budget</a></li>
+      </ul>
+    </nav>
 
- <div class="menu-blur">
-<section id="accueil" class="accueil">
-  <div class="accueil-content">
-    <h1>Carnet de Voyage – Argentine</h1>
-    <p class="sous-titre">Un voyage entre Buenos Aires et la Patagonie</p>
+    <main class="dashboard">
+      <!-- =====================================================
+       COLONNE GAUCHE
+  ====================================================== -->
 
-    <p class="intro">
-      Bienvenue dans mon carnet de voyage en Argentine.  
-    Explorez les étapes, les paysages et les moments inoubliables qui ont marqué ce périple.
-    </p>
+      <div class="colonne-gauche">
+        <section id="itineraire" class="bloc-carte">
+          <div class="itineraire-header">
+            <p class="petit-titre">NOTRE VOYAGE</p>
 
-    <a href="#itineraire" class="btn-start">Commencer le voyage</a>
-  </div>
-</section>
+            <h2>Notre parcours</h2>
 
-<section id="itineraire" class="itineraire">
-  <div class="itineraire-content">
-    <h2>Itinéraire</h2>
-    <p class="description">
-      Voici notre itinéraire en Argentine, étape par étape :  
-    nous commençons par Buenos Aires, puis direction la Patagonie avec le Fitz Roy et le Perito Moreno.  
-    Chaque lieu offre des paysages uniques et des expériences inoubliables.
-    </p>
+            <p>
+              14 jours à travers l'Argentine, de Buenos Aires aux paysages
+              sauvages de Patagonie.
+            </p>
+          </div>
 
-    <a href="itineraire.html" class="btn-itineraire">Voir l'itinéraire</a>
-  </div>
-</section>
+          <div id="map"></div>
+        </section>
 
-<section id="photo" class="section-fond">
-  <div class="section-content">
-    <h2>Galerie – Paysages d'Argentine</h2>
-    <p>Découvrez quelques moments forts de notre voyage à travers ville et montagnes.</p>
-    <a href="photos.html" class="btn">Voir toute la galerie</a>
-  </div>
-</section>
+        <!-- =====================================================
+         ITINÉRAIRE COMPLET
+    ====================================================== -->
 
-<section class="section-fond" id="budget">
-  <div class="section-content">
-    <h2>Budget</h2>
-    <p>Découvrez comment planifier votre voyage en Argentine et gérer vos dépenses efficacement.</p>
-    <a href="budget.html" class="btn">Voir le budget détaillé</a>
-  </div>
-</section>
-</div> 
+        <section class="itineraire-details">
+          <h3>Itinéraire complet</h3>
 
+          <p>
+            Voici le détail de notre parcours à travers l’Argentine depuis la
+            France.
+          </p>
 
-<script src="./script.js"></script>
-</body>
+          <div class="etapes">
+            <div class="etape">
+              <h3>Jours 1 à 3 — Buenos Aires</h3>
+
+              <ul class="lieux">
+                <li>Match de Boca Juniors</li>
+                <li>La Boca</li>
+                <li>Palermo</li>
+                <li>San Telmo</li>
+                <li>Avenue 9 de Julio</li>
+                <li>Obélisque</li>
+              </ul>
+
+              <p>
+                <strong>Souvenir :</strong> des balades sans but dans une ville
+                trop grande pour tout voir, avec toujours quelque chose à
+                découvrir.
+              </p>
+            </div>
+
+            <div class="etape">
+              <h3>Jours 4 à 5 — Ushuaia</h3>
+
+              <ul class="lieux">
+                <li>Canal de Beagle</li>
+                <li>Train de la Fin du Monde</li>
+                <li>Parc national de la Terre de Feu</li>
+                <li>Laguna Esmeralda — environ 10 km</li>
+                <li>
+                  Mirador del Glaciar Martial — montée interrompue par la neige
+                  et la glace, mais avec un beau point de vue sur Ushuaia et ses
+                  environs
+                </li>
+              </ul>
+
+              <p>
+                <strong>Souvenir :</strong> les phoques et les éléphants de mer.
+              </p>
+
+              <p>
+                <strong>Fun fact :</strong> même au bout du monde, nous avons
+                réussi à trouver du Pastis 51. 😂
+              </p>
+            </div>
+
+            <div class="etape">
+              <h3>Jours 6 à 8 — El Chaltén</h3>
+
+              <ul class="lieux">
+                <li>Lago del Desierto</li>
+                <li>
+                  Mirador du glacier Piedras Blancas — raté à cause de la météo
+                </li>
+                <li>Laguna Capri</li>
+                <li>
+                  Laguna de los Tres — environ 22 km et +850 m de dénivelé
+                </li>
+              </ul>
+
+              <p>
+                <strong>Souvenir :</strong> la revanche sur la météo et
+                l'arrivée à la Laguna de los Tres face au Fitz Roy, au pied du
+                massif.
+              </p>
+
+              <p>
+                Un autre souvenir marquant : la <strong>Chacarera</strong>, une
+                danse folklorique argentine où les danseurs tapent des mains et
+                tournent autour les uns des autres.
+              </p>
+            </div>
+
+            <div class="etape">
+              <h3>Jours 9 à 11 — El Calafate</h3>
+
+              <ul class="lieux">
+                <li>Glacier Perito Moreno depuis les passerelles</li>
+                <li>Approche du glacier en bateau</li>
+              </ul>
+
+              <p>
+                Une étape plus tranquille pour souffler un peu et profiter des
+                paysages après les randonnées d'El Chaltén.
+              </p>
+            </div>
+
+            <div class="etape">
+              <h3>Jours 12 à 13 — Retour à Buenos Aires</h3>
+
+              <p>
+                Retour à Buenos Aires pour une courte étape avant de poursuivre
+                le voyage vers San Antonio de Areco.
+              </p>
+            </div>
+
+            <div class="etape">
+              <h3>Jour 14 — San Antonio de Areco</h3>
+
+              <ul class="lieux">
+                <li>Estancia El Ombú</li>
+                <li>Balade à cheval</li>
+                <li>
+                  Village de San Antonio de Areco, comme figé dans le temps,
+                  presque dans les années 1970
+                </li>
+              </ul>
+
+              <p>Un moment de détente pour terminer le voyage.</p>
+            </div>
+            <button id="voir-itineraire">Voir tout l'itinéraire ↓</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- =====================================================
+       COLONNE DROITE
+  ====================================================== -->
+
+      <div class="colonne-droite">
+        <section id="accueil" class="bloc-accueil">
+          <h2>Le voyage en bref</h2>
+          <div class="infos-voyage">
+            <div class="destinations">
+              <h3>📍 5 destinations</h3>
+
+              <p>Buenos Aires</p>
+              <p>Ushuaia</p>
+              <p>El Calafate</p>
+              <p>El Chaltén</p>
+              <p>San Antonio de Areco</p>
+            </div>
+
+            <div class="transports">
+              <div>
+                <h3>✈️ 3 vols</h3>
+
+                <p>Buenos Aires → Ushuaia</p>
+                <p>Ushuaia → El Calafate</p>
+                <p>El Calafate → Buenos Aires</p>
+              </div>
+
+              <div>
+                <h3>🚗 2 trajets</h3>
+
+                <p>El Calafate → El Chaltén</p>
+                <p>Buenos Aires → San Antonio de Areco</p>
+              </div>
+            </div>
+
+            <div class="itineraire-resume">
+              <h3>🧭 Notre itinéraire</h3>
+
+              <div class="etapes-resume">
+                <p>
+                  <span>01</span>
+                  Buenos Aires
+                  <strong>3 jours</strong>
+                </p>
+
+                <p>
+                  <span>02</span>
+                  Ushuaia
+                  <strong>2 jours</strong>
+                </p>
+
+                <p>
+                  <span>03</span>
+                  El Chaltén
+                  <strong>3 jours</strong>
+                </p>
+
+                <p>
+                  <span>04</span>
+                  El Calafate
+                  <strong>3 jours</strong>
+                </p>
+
+                <p>
+                  <span>05</span>
+                  Buenos Aires
+                  <strong>2 jours</strong>
+                </p>
+
+                <p>
+                  <span>06</span>
+                  San Antonio de Areco
+                  <strong>1 jour</strong>
+                </p>
+              </div>
+            </div>
+
+            <div class="budget-resume" id="budget-resume">
+              <h3>💶 Budget</h3>
+
+              <h2>4 150 €</h2>
+
+              <div class="budget-details">
+                <div>
+                  <span>🏨</span>
+                  <p>Hébergement</p>
+                  <strong>500 €</strong>
+                </div>
+
+                <div>
+                  <span>✈️</span>
+                  <p>Transport</p>
+                  <strong>2 200 €</strong>
+                </div>
+
+                <div>
+                  <span>🚗</span>
+                  <p>Location</p>
+                  <strong>250 €</strong>
+                </div>
+
+                <div>
+                  <span>🍽️</span>
+                  <p>Sorties</p>
+                  <strong>1 200 €</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =====================================================
+         PHOTOS
+    ====================================================== -->
+
+        <section id="photo" class="bloc-photos">
+          <h2>Nos souvenirs</h2>
+
+          <p>Quelques moments de notre voyage.</p>
+
+          <div class="photo-grid"></div>
+          <button id="voir-galerie">Voir toute la galerie →</button>
+        </section>
+
+        <div class="lightbox" id="lightbox">
+          <div class="lightbox-content">
+            <span class="close">&times;</span>
+
+            <img class="lightbox-img" />
+
+            <div class="lightbox-nav">
+              <button id="prev">⬅</button>
+              <button id="next">➡</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="./script.js"></script>
+  </body>
 </html>
