@@ -17,7 +17,19 @@ navItems.forEach((item) => {
 });
 
 if (mapElement) {
-  const map = L.map("map");
+  const map = L.map("map", {
+    gestureHandling: true,
+    gestureHandlingOptions: {
+      duration: 1000,
+      text: {
+        touch: "Utilisez deux doigts pour déplacer la carte",
+        scroll: "Utilisez Ctrl + molette pour zoomer sur la carte",
+        scrollMac: "Utilisez ⌘ + molette pour zoomer sur la carte",
+      },
+    },
+  });
+
+  map.setView([-40.5, -68.06], 4);
 
   map.setView([-40.5, -68.06], 4);
 
@@ -457,6 +469,7 @@ if (photoGrid !== null) {
 
       const afficher = () => {
         const rect = lightboxImg.getBoundingClientRect();
+
         closeBtn.style.top = `${rect.top}px`;
         closeBtn.style.left = `${rect.right - 30}px`;
         lightboxImg.classList.remove("changing");

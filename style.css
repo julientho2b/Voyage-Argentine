@@ -789,6 +789,10 @@ button:focus-visible {
   .hero p {
     font-size: 1rem;
   }
+
+  .lightbox {
+    overflow: hidden;
+  }
 }
 
 /* Respect des préférences de mouvement réduit */
