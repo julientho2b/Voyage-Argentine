@@ -459,6 +459,54 @@ if (photoGrid !== null) {
 
     let timerPhoto;
 
+    let zoomEnCours = false;
+    let distanceDoigt = 0;
+    let largeurNormale = 0;
+
+    lightboxImg.addEventListener("touchstart", (e) => {
+      if (e.touches.length >= 2) {
+        zoomEnCours = true;
+
+        let differenceX = e.touches[1].clientX - e.touches[0].clientX;
+        let differenceY = e.touches[1].clientY - e.touches[0].clientY;
+
+        distanceDoigt = Math.sqrt(
+          Math.pow(differenceX, 2) + Math.pow(differenceY, 2),
+        );
+
+        closeBtn.style.display = "none";
+        prevBtn.style.display = "none";
+        nextBtn.style.display = "none";
+      }
+    });
+
+    lightboxImg.addEventListener("touchmove", (e) => {
+      if (e.touches.length >= 2) {
+        let differenceX = e.touches[1].clientX - e.touches[0].clientX;
+        let differenceY = e.touches[1].clientY - e.touches[0].clientY;
+
+        let distanceDoigtActuelle = Math.sqrt(
+          Math.pow(differenceX, 2) + Math.pow(differenceY, 2),
+        );
+
+        if (distanceDoigtActuelle < distanceDoigt) {
+          const rect = lightboxImg.getBoundingClientRect();
+
+          if (Math.abs(largeurNormale - rect.width) < 200) {
+            zoomEnCours = false;
+          }
+        }
+      }
+    });
+
+    lightboxImg.addEventListener("touchend", (e) => {
+      if (zoomEnCours === false) {
+        closeBtn.style.display = "block";
+        prevBtn.style.display = "block";
+        nextBtn.style.display = "block";
+      }
+    });
+
     function showPhoto(index, animer = true) {
       const photo = visiblePhotos[index];
       const imgSrc = photo.style.backgroundImage
@@ -469,6 +517,8 @@ if (photoGrid !== null) {
 
       const afficher = () => {
         const rect = lightboxImg.getBoundingClientRect();
+
+        largeurNormale = rect.width;
 
         closeBtn.style.top = `${rect.top}px`;
         closeBtn.style.left = `${rect.right - 30}px`;
